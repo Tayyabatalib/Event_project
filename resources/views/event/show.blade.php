@@ -13,18 +13,34 @@
         <div class="row">
             <div class="col mt-4">
                 <h1>Event Detail</h1>
+                <h3>users</h3>
+                {{-- @if($event->users->isEmpty())
+                    <p>No users found for this event.</p>
+                @else
+                    <ul>
+                        @foreach($event->users as $user)
+                            <li>
+                                <strong>User Name:</strong> {{ $user->user_name }}<br>
+                   
+                                <strong>Email:</strong> {{ $user->email }}<br>
+                              
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif  --}}
+
             </div>
             <div class="row">
-                <div class="col mt-4">
+                <div class="col-10 mt-4">
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
+                                <th>Event Name</th>
                                 <th>Description</th>
                                 <th>Start Time</th>
                                 <th>End Time</th>
-                                <th>User Id</th>
+                                <th>User Name/Email</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,7 +50,22 @@
                                 <td>{{ $event->description }}</td>
                                 <td>{{ $event->start_time }}</td>
                                 <td>{{ $event->end_time }}</td>
-                                <td>{{ $event->user_id }}</td>
+                                <td>
+                                    @if($event->users->isEmpty())
+                                       <p>No users found for this event.</p>
+                                    @else
+                                    <ul>
+                                        @foreach($event->users as $user)
+                                            <li>
+                                                <strong>User Name:</strong> {{ $user->user_name }}<br>
+                                   
+                                                <strong>Email:</strong> {{ $user->email }}<br>
+                                              
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                    @endif  
+                                </td>
                             </tr>
                         </tbody>
                     </table>

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\User;
 use App\Models\User_event;
+use App\Models\Venue;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Foreach_;
 
 class EventController extends Controller
 {
@@ -59,7 +61,7 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        $event = Event::find($id);
+        $event = Event::with('users')->find($id);
         return view('event.show',compact('event'));
     }
 
@@ -106,5 +108,13 @@ class EventController extends Controller
     //     $user_venue = Event::with('venue')->get();
     //     dd($user_venue);
     // }
+
+    function event_venue_list(){
+        $event_venues = Event::with('venues')->get();
+
+        foreach($event_venues as $venue){
+            dd($venue->venues->name);
+        }
+    }
 
 }

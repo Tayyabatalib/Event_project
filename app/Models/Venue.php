@@ -17,6 +17,6 @@ class Venue extends Model
 
     // Venue and Event Relation Many to One
     public function events(){
-        return $this->hasMany(Event::class,'id');
+        return $this->hasMany(Event::class,'id','event_id');
     }
 }

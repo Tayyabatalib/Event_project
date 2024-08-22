@@ -15,7 +15,7 @@
                 <h1>Ticket Detail</h1>
             </div>
             <div class="row">
-                <div class="col-6 mt-4">
+                <div class="col-8 mt-4">
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
@@ -23,6 +23,7 @@
                                 <th>Event Type</th>
                                 <th>Price</th>
                                 <th>Event Id</th>
+                                <th>Event Name/Description</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,6 +32,12 @@
                                 <td>{{ $ticket->type }}</td>
                                 <td>{{ $ticket->price }}</td>
                                 <td>{{ $ticket->event_id }}</td>
+                                <td>
+                                    <ul>
+                                        <li><strong>Event Name:</strong>{{ $ticket->events->name }}</li>
+                                        <li><strong>Description:</strong>{{ $ticket->events->description }}</li>
+                                    </ul>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

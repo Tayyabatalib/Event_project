@@ -23,6 +23,7 @@
                                 <th>Venue Name</th>
                                 <th>Address</th>
                                 <th>Event Id</th>
+                                <th>Event Name/Description</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,6 +32,18 @@
                                     <td>{{ $venue->name }}</td>
                                     <td>{{ $venue->address }}</td>
                                     <td>{{ $venue->event_id }}</td>
+                                    <td>
+                                        @if ($venue->events->isEmpty())
+                                            <p>No Event found on this venue</p>
+                                        @else
+                                            <ul>
+                                                @foreach ($venue->events as $event)
+                                                    <li><strong>Event Name:</strong>{{ $event->name }}</li>
+                                                    <li><strong>Description:</strong>{{ $event->description }}</li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </td>
                                 </tr>
                         </tbody>
                     </table>

@@ -14,4 +14,14 @@ class Ticket extends Model
         'price',
         'event_id',
     ];
+
+    /**
+     * Get all of the events for the Ticket
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function events()
+    {
+        return $this->hasOne(Event::class,'id','event_id');
+    }
 }

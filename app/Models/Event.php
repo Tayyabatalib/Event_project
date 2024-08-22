@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Event extends Model
 {
@@ -19,15 +20,17 @@ class Event extends Model
 
 
     // Event and User Relation Many To Many
-    public function user()
+    public function users()
     {
         return $this->belongsToMany(User::class, 'user_events');
     }
-
+    
     // Event and Venue Relation Many to One
-    public function venue(){
-        return $this->belongsTo(Venue::class,'event_id');
+    public function venues(){
+        return $this->belongsTo(Venue::class,'id','event_id');
     }
+
+    
 
 
     // /**

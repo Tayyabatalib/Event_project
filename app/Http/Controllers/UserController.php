@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Event;
-use GuzzleHttp\Promise\Create;
-use Illuminate\Foundation\Auth\User;
+use App\Models\User;
 use Illuminate\Http\Request;
+use GuzzleHttp\Promise\Create;
 
 class UserController extends Controller
 {
@@ -42,13 +43,14 @@ class UserController extends Controller
         
         //dd($validatedData);
 
-        $user = new User();
-        $user->user_name = $validatedData['user_name'];
-        $user->age = $validatedData['age'];
-        $user->email = $validatedData['email'];
-        $user->phone_no = $validatedData['phone_no'];
-        $user->address = $validatedData['address'];
-        $user->save();
+        User::create($validatedData);
+
+        // $user = new User();
+        // $user->name = $validatedData['user_name'];
+        
+        // $user->email = $validatedData['email'];
+       
+        // $user->save();
 
         return redirect()->route('users.index')
         ->with('success','Your are Registered Successfully');
@@ -60,8 +62,10 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        $user = User::find($id);
-
+        $user = User::with('events')
+                      ->with('venues')
+                      ->with('tickets')
+                      ->find($id);
         return view('user.show',compact('user'));
     }
 
@@ -91,16 +95,6 @@ class UserController extends Controller
 
         return redirect()->route('users.index')
         ->with('success','Your are UnRegistered Successfully');
-    }
-
-
-
-    // Relationships
-
-    
-    public function user_event_list(){
-        $users = User::with('events')->get();
-        dd($users);
     }
 
 }

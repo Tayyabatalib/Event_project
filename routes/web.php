@@ -72,11 +72,20 @@ Route::get('/user/event/index',[User_EventController::class,'index'])->name('use
 
 // Relationships
 
-// User & Event relation(many-to -many)
+// User & Event relation(many-to-many)
 Route::get('/user/event/list',[UserController::class,'user_event_list']);
 
-// Event & User relation(mant-to-many)
+Route::get('/user/event/venue',[UserController::class,'hasManyThrough']);
+
+// Event & User relation(many-to-many)
 Route::get('/event/user/list',[EventController::class,'user_event_list']);
 
-// User & Venue relation(hasMany)
-Route::get('/user/venue/list',[VenueController::class,'user_venue_list']);
+// Event & Venue relation(Many-To-One)
+Route::get('/event/venue/list',[EventController::class,'event_venue_list']);
+
+// Venue & Event relation(Many-To-One)
+Route::get('/venue/event/list',[VenueController::class,'venue_event_list']);
+
+
+// Ticket & Event relation(One-To-Many)
+Route::get('/ticket/event/list',[TicketController::class,'hasMany']);

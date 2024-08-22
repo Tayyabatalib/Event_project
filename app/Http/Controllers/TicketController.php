@@ -48,7 +48,7 @@ class TicketController extends Controller
      */
     public function show(string $id)
     {
-        $ticket = Ticket::find($id);
+        $ticket = Ticket::with('events')->find($id);
         return view('ticket.show',compact('ticket'));
     }
 
@@ -79,4 +79,12 @@ class TicketController extends Controller
         return redirect()->route('tickets.index')
                          ->with('success','Ticket Deleted Successfully');
     }
+
+
+    // For practice(It's not a part of code)
+
+    // public function hasMany(){
+    //     $tickets = Ticket::with('events')->find(3);
+    //     return $tickets->events->name ;
+    // }
 }

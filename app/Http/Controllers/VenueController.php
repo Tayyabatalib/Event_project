@@ -46,7 +46,7 @@ class VenueController extends Controller
      */
     public function show(string $id)
     {
-        $venue = Venue::find($id);
+        $venue = Venue::with('events')->find($id);
         return view('venue.show',compact('venue'));
     }
 
@@ -79,10 +79,16 @@ class VenueController extends Controller
     }
 
 
+// for Practice
+    // // Event and Venue Relation Many to One
+    // function venue_event_list(){
+    //     $venue_event = Venue::with('events')->find(3);
+    //     //  dd($venue_event->address);
+    //     //dd($venue_event->events);
 
-    // Event and Venue Relation Many to One
-    function user_venue_list(){
-        $user_venue = Venue::with('events')->get();
-        dd($user_venue);
-    }
+    //     foreach($venue_event->events as $event){
+    //         dd($event->name);
+    //     }
+
+    // }
 }

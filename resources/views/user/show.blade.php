@@ -14,6 +14,19 @@
             <div class="col mt-4">
                 <h1>Single User Detail</h1>
             </div>
+
+    {{-- @if($user->events->isEmpty())
+    <p>No events found for this user.</p>
+    @else
+    <ul>
+        @foreach($user->events as $event)
+            <li>
+                <strong>Event Name:</strong> {{ $event->name }}<br>
+                <strong>Description:</strong> {{ $event->description }}
+            </li>
+        @endforeach
+    </ul>
+@endif --}}
             <div class="row">
                 <div class="col mt-4">
                     <table class="table table-striped table-bordered">
@@ -26,8 +39,8 @@
                                 <th>Phone No</th>
                                 <th>Address</th>
                                 <th>Event</th>
-                                <th>Ticket</th>
                                 <th>Venue</th>
+                                <th>Ticket</th>
                             </tr>
                         </thead>
                         {{-- @dd($user) --}}
@@ -39,9 +52,49 @@
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->phone_no }}</td>
                                     <td>{{ $user->address }}</td>
-                                    {{-- <td>{{ $event->name }}</td> --}}
-                                    {{-- <td>{{ $ticket->price }}</td> --}}
-                                    <td></td>
+                                    <td>
+                                        @if($user->events->isEmpty())
+                                            <p>No events found for this user.</p>
+                                        @else
+                                        <ul>
+                                           @foreach($user->events as $event)
+                                           <li>
+                                              <strong>Event id:</strong> {{ $event->id }}<br>
+                                              <strong>Event Name:</strong> {{ $event->name }}<br>
+                                           </li>
+                                           @endforeach
+                                        </ul>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($user->venues->isEmpty())
+                                            <p>No venues found for this user.</p>
+                                        @else
+                                        <ul>
+                                            @foreach ($user->venues as $venue)
+                                            <li>
+                                                <strong>Event id:</strong> {{ $venue->event_id }}<br>
+                                                <strong>Venue Name:</strong> {{ $venue->name }}<br>
+                                             </li>
+                                            @endforeach
+                                         </ul>
+                                         @endif
+                                    </td>
+                                    <td>
+                                        @if($user->tickets->isEmpty())
+                                            <p>No tickets found for this user.</p>
+                                        @else
+                                        <ul>
+                                            @foreach ($user->tickets as $ticket)
+                                            <li>
+                                                <strong>Event Id:</strong> {{ $ticket->event_id }}<br>
+                                                <strong>Event type:</strong> {{ $ticket->type }}<br>
+                                                <strong>Price:</strong> {{ $ticket->price }}
+                                             </li>
+                                            @endforeach
+                                         </ul>
+                                         @endif
+                                    </td>
                                 </tr>
                         </tbody>
                     </table>
